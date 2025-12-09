@@ -1,4 +1,5 @@
 import exercises from '../data/exercises.js';
+import generateId from '../utils/generateId.js';
 
 /* GET all exercises */
 const getAllExercises = (req, res) => {
@@ -79,7 +80,7 @@ const createExercise = (req, res) => {
   }
 
   const newExercise = {
-    id: exercises.length > 0 ? exercises[exercises.length - 1].id + 1 : 1,
+    id: generateId(exercises),
     name,
     category,
     difficulty,

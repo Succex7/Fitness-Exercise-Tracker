@@ -1,4 +1,5 @@
 import sessions from '../data/sessions.js';
+import generateId from '../utils/generateId.js';
 
  /* GET all sessions */
 const getAllSessions = (req, res) => {
@@ -28,7 +29,7 @@ const createSession = (req, res) => {
   }
 
   const newSession = {
-    id: sessions.length > 0 ? sessions[sessions.length - 1].id + 1 : 1,
+    id: generateId(sessions),
     exerciseId,
     reps,
     sets,
