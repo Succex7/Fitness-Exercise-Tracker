@@ -21,4 +21,4 @@ app.use('/api/sessions', sessionRoutes);
 /* Middleware: errorHandler */
 app.use(errorHandlers); 
 
-exports.app = app;
+export default app;
