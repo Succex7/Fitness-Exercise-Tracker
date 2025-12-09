@@ -20,18 +20,18 @@ const getAllExercises = (req, res) => {
   if (req.query.duration) {
     const durationQuery = req.query.duration;
 
-    if (durationQuery.gte) {
+/*     if (durationQuery.gte) {
       results = results.filter(ex => ex.duration >= Number(durationQuery.gte));
-    }
+    } */
 
     if (durationQuery.lte) {
       results = results.filter(ex => ex.duration <= Number(durationQuery.lte));
     }
 
-    if (durationQuery.eq) {
+/*     if (durationQuery.eq) {
       results = results.filter(ex => ex.duration === Number(durationQuery.eq));
     }
-  }
+ */  }
 
 /* Sorting */
   if (sort) {

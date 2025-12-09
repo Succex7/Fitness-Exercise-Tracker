@@ -5,4 +5,4 @@ function errorHandler(err, req, res, next) {
   });
 }
 
-exports.errorHandler = errorHandler;
+export default errorHandler;

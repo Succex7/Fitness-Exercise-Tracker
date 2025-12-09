@@ -24,7 +24,7 @@ router.post('/', validateExercise, createExercise);
 /* UPDATE an exercise completely */
 router.put('/:id', validateExercise, updateExercise);
 
-/* PARTIALLY update an exercise */
+/* PARTIALLY (PATCH) update an exercise */
 router.patch('/:id', patchExercise);
 
 /* DELETE an exercise */
