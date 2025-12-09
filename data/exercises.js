@@ -1,0 +1,23 @@
+const exercises = [
+    { id: 1, name: 'push-up', duration: '30 seconds', difficulty: 'easy' },
+    { id: 2, name: 'squat', duration: '45 seconds', difficulty: 'medium' },
+    { id: 3, name: 'pull-up', duration: '20 seconds', difficulty: 'hard' },
+    { id: 4, name: 'plank', duration: '60 seconds', difficulty: 'medium' },
+    { id: 5, name: 'lunge', duration: '40 seconds', difficulty: 'medium' },
+    { id: 6, name: 'burpees', duration: '30 seconds', difficulty: 'hard' },
+    { id: 7, name: 'sit-up', duration: '50 seconds', difficulty: 'easy' },
+    { id: 8, name: 'mountain climber', duration: '30 seconds', difficulty: 'hard' },
+    { id: 9, name: 'jumping jack', duration: '60 seconds', difficulty: 'easy' },
+    { id: 10, name: 'high knees', duration: '45 seconds', difficulty: 'medium' },
+    { id: 11, name: 'tricep dip', duration: '30 seconds', difficulty: 'medium' },
+    { id: 12, name: 'leg raise', duration: '40 seconds', difficulty: 'medium' },
+    { id: 13, name: 'bicycle crunch', duration: '50 seconds', difficulty: 'medium' },
+    { id: 14, name: 'wall sit', duration: '60 seconds', difficulty: 'easy' },
+    { id: 15, name: 'jump squat', duration: '30 seconds', difficulty: 'hard' },
+    { id: 16, name: 'side plank', duration: '45 seconds', difficulty: 'medium' },
+    { id: 17, name: 'glute bridge', duration: '40 seconds', difficulty: 'easy' },
+    { id: 18, name: 'russian twist', duration: '50 seconds', difficulty: 'medium' },
+    { id: 19, name: 'flutter kick', duration: '30 seconds', difficulty: 'medium' },
+    { id: 20, name: 'inchworm', duration: '60 seconds', difficulty: 'hard' },
+
+]
