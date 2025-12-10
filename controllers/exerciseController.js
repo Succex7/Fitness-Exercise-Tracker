@@ -5,58 +5,69 @@ import generateId from '../utils/generateId.js';
 const getAllExercises = (req, res) => {
   let results = [...exercises];
 
-  const { category, difficulty, sort, page = 1, limit = 10 } = req.query;
+   // -------- FILTERING ----------
+    const { category, difficulty, duration, sort } = req.query;
 
-/* Filter by category */
-  if (category) {
-    results = results.filter(ex => ex.category === category);
-  }
-
-/* Filter by difficulty */
-  if (difficulty) {
-    results = results.filter(ex => ex.difficulty === difficulty);
-  }
-
-/* Duration filters (gte, lte, eq) */
-  if (req.query.duration) {
-    const durationQuery = req.query.duration;
-
-/*     if (durationQuery.gte) {
-      results = results.filter(ex => ex.duration >= Number(durationQuery.gte));
-    } */
-
-    if (durationQuery.lte) {
-      results = results.filter(ex => ex.duration <= Number(durationQuery.lte));
+    if (category) {
+      results = results.filter(ex => ex.category.toLowerCase() === category.toLowerCase());
     }
 
-/*     if (durationQuery.eq) {
-      results = results.filter(ex => ex.duration === Number(durationQuery.eq));
+    if (difficulty) {
+      results = results.filter(ex => ex.difficulty.toLowerCase() === difficulty.toLowerCase());
     }
- */  }
 
-/* Sorting */
-  if (sort) {
-    const sortField = sort.startsWith('-') ? sort.substring(1) : sort;
-    const direction = sort.startsWith('-') ? -1 : 1;
+    if (duration) {
+      const value = Number(duration);
+      if (!isNaN(value)) {
+        results = results.filter(ex => ex.duration <= value); // using only lte as required
+      }
+    }
 
-    results = results.sort((a, b) => {
-      if (a[sortField] > b[sortField]) return direction;
-      if (a[sortField] < b[sortField]) return -direction;
-      return 0;
+    // -------- SORTING ----------
+    if (sort) {
+      const field = sort.replace("-", "");
+      const direction = sort.startsWith("-") ? -1 : 1;
+
+      results.sort((a, b) => {
+        if (a[field] < b[field]) return -1 * direction;
+        if (a[field] > b[field]) return 1 * direction;
+        return 0;
+      });
+    }
+
+    // -------- OPTIONAL PAGINATION ----------
+    const { limit, page } = req.query;
+
+    // IF user didn't request pagination → return ALL items
+    if (!limit && !page) {
+      return res.json({
+        total: results.length,
+        data: results,
+      });
+    }
+
+    // IF user requested pagination → apply it
+    const pageNum = Number(page) || 1;
+    const limitNum = Number(limit) || results.length;
+
+    const start = (pageNum - 1) * limitNum;
+    const end = start + limitNum;
+
+    const paginated = results.slice(start, end);
+
+    res.json({
+      total: results.length,
+      page: pageNum,
+      limit: limitNum,
+      data: paginated,
     });
+
+    try {
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
-
-/* Pagination */
-  const start = (page - 1) * limit;
-  const end = start + Number(limit);
-  const paginated = results.slice(start, end);
-
-  res.json({
-    total: results.length,
-    page: Number(page),
-    limit: Number(limit),
-    data: paginated
-  });
 };
 
 /* GET a single exercise by ID */
