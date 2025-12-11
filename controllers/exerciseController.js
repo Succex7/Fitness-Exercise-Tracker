@@ -5,7 +5,7 @@ import generateId from '../utils/generateId.js';
 const getAllExercises = (req, res) => {
   let results = [...exercises];
 
-   // -------- FILTERING ----------
+   /* filtering  */
     const { category, difficulty, duration, sort } = req.query;
 
     if (category) {
@@ -23,7 +23,7 @@ const getAllExercises = (req, res) => {
       }
     }
 
-    // -------- SORTING ----------
+    /* sorting */
     if (sort) {
       const field = sort.replace("-", "");
       const direction = sort.startsWith("-") ? -1 : 1;
@@ -35,10 +35,10 @@ const getAllExercises = (req, res) => {
       });
     }
 
-    // -------- OPTIONAL PAGINATION ----------
+    /* pagination */
     const { limit, page } = req.query;
 
-    // IF user didn't request pagination → return ALL items
+     /* If user doesn't request pagination, it'll return all items */ 
     if (!limit && !page) {
       return res.json({
         total: results.length,
@@ -46,7 +46,7 @@ const getAllExercises = (req, res) => {
       });
     }
 
-    // IF user requested pagination → apply it
+    /* If user requests pagination it'll apply it */
     const pageNum = Number(page) || 1;
     const limitNum = Number(limit) || results.length;
 
