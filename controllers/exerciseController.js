@@ -10,7 +10,7 @@ const getAllExercises = (req, res) => {
 
     if (category) {
       results = results.filter(ex => ex.category.toLowerCase() === category.toLowerCase());
-    }
+    } 
 
     if (difficulty) {
       results = results.filter(ex => ex.difficulty.toLowerCase() === difficulty.toLowerCase());
@@ -19,7 +19,7 @@ const getAllExercises = (req, res) => {
     if (duration) {
       const value = Number(duration);
       if (!isNaN(value)) {
-        results = results.filter(ex => ex.duration <= value); // using only lte as required
+        results = results.filter(ex => ex.duration <= value); /* filters duration by less than or equal to the requested time (lte) */
       }
     }
 
@@ -29,16 +29,16 @@ const getAllExercises = (req, res) => {
       const direction = sort.startsWith("-") ? -1 : 1;
 
       results.sort((a, b) => {
-        if (a[field] < b[field]) return -1 * direction;
+        if (a[field] < b[field]) return -1 * direction; /* sorts exercises based on the field and direction */
         if (a[field] > b[field]) return 1 * direction;
         return 0;
       });
     }
 
     /* pagination */
-    const { limit, page } = req.query;
+    const { limit, page } = req.query; 
 
-     /* If user doesn't request pagination, it'll return all items */ 
+     /* If user doesn't request pagination, it'll return all items with total count */ 
     if (!limit && !page) {
       return res.json({
         total: results.length,
@@ -51,9 +51,9 @@ const getAllExercises = (req, res) => {
     const limitNum = Number(limit) || results.length;
 
     const start = (pageNum - 1) * limitNum;
-    const end = start + limitNum;
+    const end = start + limitNum;  /* calculates which item to show based on page and number limit */
 
-    const paginated = results.slice(start, end);
+    const paginated = results.slice(start, end); /* this picks the correct item for that page */
 
     res.json({
       total: results.length,
@@ -64,7 +64,7 @@ const getAllExercises = (req, res) => {
 
     try {
 
-  } catch (err) {
+  } catch (err) {   /* to catch unexpected errors */
     console.error(err);
     res.status(500).json({ message: "Server error" });
   }
@@ -72,7 +72,7 @@ const getAllExercises = (req, res) => {
 
 /* GET a single exercise by ID */
 const getExerciseById = (req, res) => {
-  const id = parseInt(req.params.id);
+  const id = parseInt(req.params.id); 
   const exercise = exercises.find(ex => ex.id === id);
 
   if (!exercise) {

@@ -13,8 +13,10 @@ const validateExercise = (req, res, next) => {
     return res.status(400).json({ message: 'Name is required.' });
   }
 
-  if (typeof category !== 'string' || category.trim() === '') {
-    return res.status(400).json({ message: 'category must be: strength, cardio, flexibility.' });
+  if (typeof category !== 'string' || !['strength', 'cardio', 'flexibility'].includes(category.toLowerCase())) {
+    return res.status (400).json({
+      message: 'Category must be: strength, cardio, flexibility.'
+    });
   }
 
   if (typeof difficulty !== 'string' || !['easy', 'medium', 'hard'].includes(difficulty.toLowerCase())) {

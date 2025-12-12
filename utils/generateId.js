@@ -1,6 +1,7 @@
+/* Start IDs at 1 if array is empty or not valid */
 const generateId = (array) => {
   if (!Array.isArray(array) || array.length === 0) {
-    return 1; // Start IDs at 1 if array is empty or not valid
+    return 1; 
   }
 
   /* Extracts all current IDs */
